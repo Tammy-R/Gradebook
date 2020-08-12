@@ -63,6 +63,10 @@ class DiaryPage {
         return cy.get('button.mb-3').contains("Delete")
     }
 
+    get alert(){
+        return cy.get('.alert-danger')
+    }
+
 
     create(diaryTitle) {
         this.title.type(diaryTitle)

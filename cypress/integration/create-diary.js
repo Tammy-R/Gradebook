@@ -35,6 +35,27 @@ describe("Create Gradebook", () => {
         cy.url().should('contain', '/gradebooks')
     })
 
+    it("Create Diary - no name or professor", () => {
+        diaryPage.submit.click()
+        diaryPage.alert.should('exist')
+            .should('be.visible')
+        cy.url().should('contain', '/create-gradebook')
+    })
 
+    it("Create Diary - no name", () => {
+        diaryPage.professor.select("50")
+        diaryPage.submit.click()
+        diaryPage.alert.should('exist')
+            .should('be.visible')
+        cy.url().should('contain', '/create-gradebook')
+    })
+
+    it("Create Diary - no professor", () => {
+        diaryPage.title.type('title')
+        diaryPage.submit.click()
+        diaryPage.alert.should('exist')
+            .should('be.visible')
+        cy.url().should('contain', '/create-gradebook')
+    })
 
 })

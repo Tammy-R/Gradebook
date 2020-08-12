@@ -9,7 +9,7 @@ class Professors {
     }
 
     get createProf() {
-        return cy.get('[class="dropdown-item"]').eq(1)
+        return cy.get('[class="dropdown-item"]').contains('Create')
     }
 
     get filter() {
@@ -55,8 +55,13 @@ class Professors {
 
 
     newProfessor(name, last, url) {
-        this.firstName.type(name)
-        this.lastName.type(last)
+        if(name){
+            this.firstName.type(name)
+        }
+        if(last){
+            this.lastName.type(last)
+        }
+        
         this.addImg.click()
         this.imgUrl.type(url)
     }

@@ -41,6 +41,15 @@ describe("Edit diary", () => {
 
     })
 
+    it("Edit diary - can't add student", () => {
+        // diaryPage.search('New')
+        newStudent.addStudent.click()
+        cy.wait(1000)
+        newStudent.add('Jane', '', '')
+        cy.url().should('contain','/add-student')
+
+    })
+
 
     it("Edit diary - add comment", () => {
         // diaryPage.search('New')

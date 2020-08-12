@@ -34,10 +34,18 @@ class Student {
     }
 
     add(stName, stLastName, stUrl) {
-        this.studName.type(stName)
-        this.studLastName.type(stLastName)
+        if(stName){
+            this.studName.type(stName)
+        }
+        if(stLastName){
+            this.studLastName.type(stLastName)
+        }
+        
         this.studBtnImage.click()
-        this.studUrl.type(stUrl)
+        if(stUrl){
+            this.studUrl.type(stUrl)
+        }
+        
         this.studSubmit.click()
     }
 

@@ -3,6 +3,8 @@ import { diaryPage } from "../page_object/diary"
 import { USER } from "../fixtures/constants"
 import { profPage } from "../page_object/prof"
 
+let url = 'https://upload.wikimedia.org/wikipedia/bs/c/c4/Homerova_slika.png'
+
 describe("Proffesors module", () => {
 
     before(() => {
@@ -28,9 +30,11 @@ describe("Proffesors module", () => {
 
     })
 
+    
+
     it("Create professor", () => {
         // profPage.dropdown.click()
-        profPage.newProfessor('Pera', 'Peric', 'url')
+        profPage.newProfessor('Pera', 'Peric', url)
         profPage.removeImg.should('be.visible')
         profPage.moveUp.should('be.visible')
         profPage.moveDown.should('be.visible')
@@ -38,9 +42,9 @@ describe("Proffesors module", () => {
         cy.url().should('contain', '/all-professors')
     })
 
-    it.only("All professors", () => {
-        profPage.dropdown.click()
-        profPage.allProf.click()
+    it("All professors", () => {
+        // profPage.dropdown.click()
+        // profPage.allProf.click()
         cy.wait(1000)
         profPage.profesorList.should('be.visible')
         profPage.filter.should('be.visible')
@@ -48,5 +52,18 @@ describe("Proffesors module", () => {
         profPage.filter.should('have.value', 'Tamara')
 
     })
+
+    it("Create professor - no first name", () => {
+        profPage.dropdown.click()
+        profPage.createProf.click()
+        profPage.newProfessor('', 'Peric', 'url')
+        profPage.submit.click()
+        profPage.firstName.then(($input) => {
+            expect($input[0].validationMessage).to.eq('Please fill out this field.')
+        })
+        cy.url().should('contain', '/create-professor')
+    })
+
+   
 
 })
