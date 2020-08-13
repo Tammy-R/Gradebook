@@ -1,0 +1,915 @@
+{
+	"info": {
+		"_postman_id": "4a1d8422-5a18-44e0-866f-9371ae5355b5",
+		"name": "Gradebook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register-negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b575550f-a403-4f04-af62-7183736db730",
+								"exec": [
+									"pm.test(\"Status code is 400 (Bad request)\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"{{$randomFirstName}}\",\n    \"lastName\": \"{{$randomLastName}}\",\n    \"email\": \"\",\n    \"password\": \"PeraPeric2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a2422e07-5b8f-4d5f-87a3-77ede250102e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"{{$randomFirstName}}\",\n    \"lastName\": \"{{$randomLastName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"PeraPeric2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login - negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "40602b4f-87b0-4034-9ffb-08979fc44c92",
+								"exec": [
+									"pm.test(\"Invalid credentials\", function () {",
+									"    pm.response.to.have.body('{\"error\":\"invalid_credentials\"}');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Unauthorised, Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ruzictam@gmail.com\",\n    \"password\": \"ivify\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}login",
+							"host": [
+								"{{url}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "033a20b5-ba6c-405a-94c0-6dfdda68f88c",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"user_token\", jsonData.token);",
+									"pm.environment.set(\"user_id\", jsonData.user.id);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const schema = {",
+									"    \"type\" : \"object\",",
+									"    \"properties\" : {",
+									"        \"token\" : { \"type\" : \"string\"},",
+									"        \"user\" : {\"type\" : \"object\"},",
+									"    },",
+									"    \"required\" : [\"token\", \"user\"]",
+									"};",
+									"pm.test(\"Validate schema\", () => {",
+									"    pm.response.to.have.jsonSchema(schema);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ruzictam@gmail.com\",\n    \"password\": \"Vivify20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}login",
+							"host": [
+								"{{url}}login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Diary",
+			"item": [
+				{
+					"name": "create diary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "430c5f75-f7d8-4429-b04d-832257b7702a",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"gradebook_id\", jsonData.id);",
+									"",
+									"pm.test(\"New diary created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Gradebook one\",\n    \"professor_id\": 60\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}diaries",
+							"host": [
+								"{{url}}diaries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all diaries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1a70fe7-1da7-4fb4-bc53-df987009773b",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var idNewDiary= pm.variables.get(\"gradebook_id\");",
+									"var idExist = true;",
+									"",
+									"for (i=0; i<jsonData.data.length;i++){",
+									"  ",
+									"  if (jsonData.data[i].id == idNewDiary){",
+									"      idExist = true;",
+									"  }",
+									"}",
+									"tests[\"New diary created\"] = idExist === true;",
+									"",
+									"",
+									"",
+									"pm.test(\"Check the length of the target\", function () {",
+									"    pm.expect(jsonData.data).to.have.lengthOf(10);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}diaries?page=1",
+							"host": [
+								"{{url}}diaries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all diaries second page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c40dc664-d401-4bb9-9c43-8cb7502cba4b",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check the length of the target\", function () {",
+									"    pm.expect(jsonData.data).to.have.lengthOf(10);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}diaries?page=2",
+							"host": [
+								"{{url}}diaries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5b3953d-b9e2-4655-881d-d6788fe719c0",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"variable_key\", \"variable_value\");",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Gallery Saved\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Gallery Saved!!\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"{{$randomFirstName}}\",\n    \"lastName\": \"{{$randomLastName}}\",\n    \"url\": [\n        \"https://robbiesenbach.com/wp-content/uploads/2019/05/59a5dd9cb065da49008b4878-750-563.png\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}diaries/{{gradebook_id}}/students",
+							"host": [
+								"{{url}}diaries"
+							],
+							"path": [
+								"{{gradebook_id}}",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit diary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "49aa8449-66b4-41f4-8d8a-70b5eea9f490",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Title has been changed\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"changed\");",
+									"});",
+									"",
+									"tests[\"New title is Gradebook changed\"] = jsonData.title = \"Gradebook changed\""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 88,\n    \"title\": \"Gradebook changed\",\n    \"professor_id\": 60,\n    \"created_at\": \"2020-08-10 08:46:11\",\n    \"updated_at\": \"2020-08-10 08:46:11\",\n    \"professor\": {\n        \"id\": 60,\n        \"user_id\": 60,\n        \"url\": null,\n        \"created_at\": \"2020-08-10 08:04:26\",\n        \"updated_at\": \"2020-08-10 08:04:26\",\n        \"user\": {\n            \"id\": 60,\n            \"firstName\": \"Tamara\",\n            \"lastName\": \"Ružić\",\n            \"email\": \"ruzictam@gmail.com\",\n            \"email_verified_at\": \"2020-08-10 08:04:26\",\n            \"termsAndConditions\": null,\n            \"created_at\": \"2020-08-10 08:04:26\",\n            \"updated_at\": \"2020-08-10 08:04:26\"\n        }\n    },\n    \"students\": [\n        {\n            \"id\": 21,\n            \"firstName\": \"Jane\",\n            \"lastName\": \"Doe\",\n            \"diary_id\": 88,\n            \"created_at\": \"2020-08-10 08:47:39\",\n            \"updated_at\": \"2020-08-10 08:47:39\"\n        },\n        {\n            \"id\": 22,\n            \"firstName\": \"Jane\",\n            \"lastName\": \"Doe\",\n            \"diary_id\": 88,\n            \"created_at\": \"2020-08-10 08:49:53\",\n            \"updated_at\": \"2020-08-10 08:49:53\"\n        },\n        {\n            \"id\": 23,\n            \"firstName\": \"Jane\",\n            \"lastName\": \"Doe\",\n            \"diary_id\": 88,\n            \"created_at\": \"2020-08-10 08:51:34\",\n            \"updated_at\": \"2020-08-10 08:51:34\"\n        }\n    ],\n    \"comments\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}diaries/{{gradebook_id}}",
+							"host": [
+								"{{url}}diaries"
+							],
+							"path": [
+								"{{gradebook_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d0214e90-9eea-45ea-b891-14c3e6291ffb",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"comment_id\", jsonData.id);",
+									"",
+									"",
+									"var diaryId = pm.environment.get(\"gradebook_id\");",
+									"",
+									"",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});",
+									"",
+									"tests[\"Comment is in right diary\"] = jsonData.diary_id == diaryId;",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"New comment\",\n    \"user_id\": 56\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}diaries/{{gradebook_id}}/comments",
+							"host": [
+								"{{url}}diaries"
+							],
+							"path": [
+								"{{gradebook_id}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get diary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "61226aa8-f95f-4004-bbe0-9aacf773ab93",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"tests[\"Title is changed\"] = jsonData.title == \"Gradebook changed\";",
+									"",
+									"tests[\"Diary has comments\"] = jsonData.comments != [];"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}diaries/{{gradebook_id}}",
+							"host": [
+								"{{url}}diaries"
+							],
+							"path": [
+								"{{gradebook_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f108cd41-ef70-4386-a390-8b3de95fd47f",
+								"exec": [
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}comments/{{comment_id}}",
+							"host": [
+								"{{url}}comments"
+							],
+							"path": [
+								"{{comment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm deleted comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8ad6f577-ec98-4def-82f1-5feba38f9625",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var idDeletedComment = pm.variables.get(\"comment_id\");",
+									"var idExist = false;",
+									"",
+									"for(var i=0; i<= jsonData.comments.length; i++){",
+									"    if(jsonData.comments[i] == idDeletedComment){",
+									"        idExist = true",
+									"    }",
+									"}",
+									"tests[\"Comment has been deleted\"] = idExist == false;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}diaries/{{gradebook_id}}",
+							"host": [
+								"{{url}}diaries"
+							],
+							"path": [
+								"{{gradebook_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete diary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ccaa0360-bbbd-4355-bfed-70f6444d050f",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Gradebook one\",\n    \"professor_id\": 60\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}diaries/{{gradebook_id}}",
+							"host": [
+								"{{url}}diaries"
+							],
+							"path": [
+								"{{gradebook_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm diary deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a95bcc77-eb39-4fb7-92ac-738cbe7ea29a",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var idRemovedDiary = pm.variables.get(\"gradebook_id\");",
+									"var idExist = false;",
+									"",
+									"",
+									"",
+									"for (i=0; i<jsonData.data.length;i++){",
+									"  ",
+									"  if (jsonData.data[i].id == idRemovedDiary){",
+									"      idExist = true;",
+									"  }",
+									"}",
+									"tests[\"Diary has been deleted\"] = idExist === false;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}diaries?page=1",
+							"host": [
+								"{{url}}diaries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Proffesor",
+			"item": [
+				{
+					"name": "create professor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0da84f1a-d221-4efe-b1b6-9bba5ef64467",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": [\n        \"https://cdn.vox-cdn.com/thumbor/hMjGeoppv_F7Z8FKyoh1BGV3mgw=/0x0:3733x2100/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/56282283/1508_promo_stills_12001692731.0.jpg\"\n    ],\n    \"firstName\": \"{{$randomFirstName}}\",\n    \"lastName\": \"{{$randomLastName}}\",\n    \"diary_id\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}professors",
+							"host": [
+								"{{url}}professors"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
