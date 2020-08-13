@@ -2,7 +2,12 @@ import { loginPage } from "../page_object/login_page"
 import { diaryPage } from "../page_object/diary"
 import { USER } from "../fixtures/constants"
 import { newStudent } from "../page_object/student"
+import faker from "faker";
 
+let name = faker.name.firstName();
+let lastName = faker.name.lastName();
+let comment = faker.lorem.sentence();
+let url = 'https://citymagazine.rs/wp-content/uploads/2019/10/homer-simpson-1213x564.jpg'
 
 describe("Edit diary", () => {
 
@@ -34,8 +39,8 @@ describe("Edit diary", () => {
         // diaryPage.search('New')
         newStudent.addStudent.click()
         cy.wait(1000)
-        newStudent.add('Jane', 'Doe', 'url')
-        newStudent.studentList.should('contain', 'Doe')
+        newStudent.add(name, lastName, url)
+        newStudent.studentList.should('contain', lastName)
         newStudent.diaryName.should('contain', 'New')
         cy.expect('https://gradebook.vivifyideas.com/single-gradebook/').to.eq('https://gradebook.vivifyideas.com/single-gradebook/')
 

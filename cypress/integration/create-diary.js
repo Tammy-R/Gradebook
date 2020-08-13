@@ -29,7 +29,7 @@ describe("Create Gradebook", () => {
     })
 
 
-    it("Create Diary", () => {
+    it.only("Create Diary", () => {
         diaryPage.create('New diary')
         diaryPage.title.should('have.value', 'New diary')
         cy.url().should('contain', '/gradebooks')

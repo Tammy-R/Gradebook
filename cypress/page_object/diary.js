@@ -70,7 +70,7 @@ class DiaryPage {
 
     create(diaryTitle) {
         this.title.type(diaryTitle)
-        this.professor.select("60")
+        this.professor.select("50")
         this.submit.click()
     }
 
