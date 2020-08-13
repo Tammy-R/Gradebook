@@ -1,0 +1,209 @@
+,,,,,,,,
+Project: Gradebook,,,,,,,,
+Module:,Layout for nonregister user,,,,,,,
+Test title:,Test case ID:,Pre-condition,Test steps,,,Expected results,,Actual Results
+Launch application,TC-01,Open the browser,"1.Enter url in search field
+2.click on submit button",,,Browser should open home page,,Home page is open
+Validate sign in button,TC-2,TC-1,Validate sign in button is on the header and it shuld be clickable,,,sign in button is on the header and it is clickable,,Sign in button is on the page and clickable
+Validate register button,TC-3,TC-1,Validate register button is on the header and it shuld be clickable,,,register button is on the header and it is clickable,,register button is on the header and it is clickable
+Validate email and password field and submit button,TC-4,TC-1,Validate email and password field are input fields and submit button is clicable,,,Fields are input fields and button is clicable,,All fields are input fields and button is clickable
+,,,,,,,,
+,,,,,,,,
+Module,Register,,,,,,,
+Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
+Launch application,TC-01,Open the browser,"1.Enter url in search field
+2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
+Click on register button,TC-2,TC-1,Click on register button,,,Register page is opened,,Register page opened
+Validate all fields and buttons,TC-3,TC-2,"Validate that there are fields for name, password, conffirm pass and email, subbmit button",,,All fields are on the page. Submit button is on the page and it’s clickable,,All fields are on the page. Submit button is on the page and it’s clickable
+Register with valid credentials,TC-4,"TC-2, TC-3","Enter first name
+Enter last name
+Enter pass
+Confirm pass
+Enter email
+Tick terms&cond
+Click submit button",,"Tamara
+Ruzic
+Vivify20
+vivify20
+ruzictam@gmail.com","All fields have been filled out properly, user is registered",,"User is registered, home page is opened"
+Register - no first name,TC-5,"TC-2, TC-3","Skip first name
+Enter last name
+Enter pass
+Confirm pass
+Enter email
+Tick terms&cond
+Click submit button",,"/
+Ruzic
+Vivify20
+Vivify20
+ruzictam@gmail.com",Warning message (first name is required) - Plese fill out this field,,"User can’t be registered
+In postman I receive status 200 instead 400."
+Register - no last name,TC-6,"TC-2, TC-3","Enter first name
+Skip last name
+Enter pass
+Confirm pass
+Enter email
+Tick terms&cond
+Click submit button",,"Tamara
+/
+Vivify20
+Vivify20
+ruzictam@gmail.com",Warning message (last name is required) - Plese fill out this field. User can’t be registered,,"User can’t be registered
+In postman I receive status 200 instead 400."
+Register - wrong password,TC-7,"TC-2, TC-3","Enter first name
+Enter last name
+Wrong pass
+Confirm pass
+Enter email
+Tick terms&cond
+Click submit button",,"Tamara
+Ruzic
+test1
+test1
+ruzictam@gmail.com",Pass has to match requested format.User can’t be registered,,"User can’t be registered
+In postman I receive status 200 instead 400."
+Register - wrong password confirmation,TC-8,"TC-2, TC-3","Enter first name
+Enter last name
+Enter pass
+Wrong confirm pass
+Enter email
+Tick terms&cond
+Click submit button",,"Tamara
+Ruzic
+Vivify20
+vivify20
+ruzictam@gmail.com",Password doesn’t match. Try again.User can’t be registered,,"User can’t be registered
+In postman I receive status 200 instead 400."
+Register - no email,TC-8,"TC-2, TC-3","Enter first name
+Enter last name
+Enter pass
+Confirm pass
+Skip email
+Tick terms&cond
+Click submit button",,"Tamara
+Ruzic
+Vivify20
+vivify20
+/",Email is required.User can’t be registered,,"User can’t be registered
+In postman I receive status 200 instead 400."
+Register - wrong email,TC-9,"TC-2, TC-3","Enter first name
+Enter last name
+Enter pass
+Confirm pass
+Enter wrong email
+Tick terms&cond
+Click submit button",,"Tamara
+Ruzic
+Vivify20
+vivify20
+ruzictam.com",Email is incomplete.User can’t be registered,,"User can’t be registered
+In postman I receive status 200 instead 400."
+Register - no terms&cond,TC-10,"TC-2, TC-3","Enter first name
+Enter last name
+Enter pass
+Confirm pass
+Enter email
+Tick terms&cond
+Click submit button",,"Tamara
+Ruzic
+Vivify20
+vivify20
+ruzictam@gmail.com",User can’t be registered,,User can’t be registered
+,,,,,,,,
+,,,,,,,,
+Module name:,Login,,,,,,,
+Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
+Launch application,TC-01,Open the browser,"1.Enter url in search field
+2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
+Click on Sign in button,TC-2,TC-1,Click on sign in button,,,Login page is opened,,Login page opened
+Validate all fields and buttons,TC-3,TC-2,"Validate that there are fields for email, and login button",,,All fields are on the page. Login button is on the page and it’s clicable,,All fields are on the page. Login button is on the page and it’s clicable
+Login - valid credentials,TC-4,"TC-1, TC-2","Enter valid email
+Enter valid pass
+click login button",,"ruzictam@gmail.com
+Vivify20","Valid credentials, user is logged in.",,User is logged in. Home page is open.
+Login - invalid username,TC-5,"TC-1, TC-2","Enter invalid email
+Enter valid pass
+click login button",,"tam@hotmail.com
+Vivify20",Wrong email. User can’t be logged in.,,User can’t be logged in
+Login - invalid pass,TC-6,"TC-1, TC-2","Enter valid email
+Enter valid pass
+click login button",,"ruzictam@gmail.com
+vivify",Wrong password. User can’t be logged in.,,User can’t be logged in
+,,,,,,,,
+,,,,,,,,
+Module name:,All gradesbook,,,,,,,
+Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
+Launch application,TC-01,Open the browser,"1.Enter url in search field
+2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
+Log in,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
+Vivify20",User is logged in,,User is logged in
+Validate all fields and buttons,TC-3,TC-2,"Validate that there is search field, search button, list of gradebooks and buttons next/previous",,,Search field is on the page. Buttons are on the page.,,"Search fild is input field, all buttons are on the page and clicable"
+Search gradebook,TC-4,"TC-1, TC-2","Enter name of gradebook
+click on Search button",,test,Gradebooks with test name is listed,,Gradebooks with test name is listed
+Next/Previous button,TC-5,"TC-1, TC-2","Click Next button
+Click Previous button",,,"Click on Next button should show next page with gradebooks
+Click on Preveous return previous page with gradebooks",,"Click on Next button should show next page with gradebooks
+Click on Preveous return previous page with gradebooks"
+Gradebook,TC-6,"TC-1, TC-2",Gradebook is clicable,,,Click on title opens that gradebook,,Click on title opens that gradebook
+,,,,,,,,
+,,,,,,,,
+Module name:,Create gradebook,,,,,,,
+Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
+Launch application,TC-01,Open the browser,"1.Enter url in search field
+2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
+Log in,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
+Vivify20",User is logged in,,User is logged in
+Click on Create Gradebook,TC-3,TC-2,Click on Create Gradebook in header,,https://gradebook.vivifyideas.com/create-gradebook,Create gradebook page is opened,,Create gradebook page is opened
+Validate all fields and buttons,TC-4,TC-3,"Validate that there are gradebook and proffesor fields, submit button",,,Button and fields on the page,,Button and fields on the page
+Create diary,TC-5,TC-3,"Enter title
+Chose professor
+Click on Submit button",,"New Gradebook
+Tamara Ruzic",New Gradebook is entered. Professor chosen. Diary created,,New Gradebook diary created.
+Create - no title,TC-6,TC-3,"Chose professor
+Click on Submit button",,Tamara Ruzic,"warning message, title is required",,Diary can’t be created
+Create - no professor,TC-7,TC-3,"Enter title
+Click on Submit button",,New Gradebook,"warning message, professor is required",,Diary can’t be created
+,,,,,,,,
+,,,,,,,,
+Module name:,My gradebook,,,,,,,
+Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
+Launch application,TC-01,Open the browser,"1.Enter url in search field
+2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
+Log in,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
+Vivify20",User is logged in,,User is logged in
+Click on My Gradebook,TC-3,TC-2,Click on My Gradebook in header,,https://gradebook.vivifyideas.com/my-gradebook/5,My gradebook page is opened,,My gradebook page is opened
+Validate all fields and buttons,TC-4,TC-3,"Validate that there is Student button, comment field, submit button, edit and delete buttons",,,Buttons and field on the page,,Buttons and field on the page
+Add Student,TC-5,TC-3,Click on Add Student button,,,If you don’t have diary warning message is showen: “ You dont have your diary. Please first set your own diary”,,If you don’t have diary warning message is showen: “ You dont have your diary. Please first set your own diary”
+Add Student,TC-5,TC-3,"Click on Add Student button
+Enter student’s name and image",,"Jane Doe
+https://robbiesenbach.com/wp-content/uploads/2019/05/59a5dd9cb065da49008b4878-750-563.png",New page is opened. All fileds are filled out. student is created,,student is created
+Student,TC-6,TC-3. TC-5,No name,,Jane,Last name and name required,,Student can’t be created
+Comment,TC-6,TC-3,"Write comment
+Click on Submit button",,First Comment,Comment is posted,,Comment is posted
+,,,,,,,,
+,,,,,,,,
+Module name:,All Professors,,,,,,,
+Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
+Launch application,TC-01,Open the browser,"1.Enter url in search field
+2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
+Log in,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
+Vivify20",User is logged in,,User is logged in
+Click on Proffesors/All Professors,TC-3,TC-2,Click on Professors/All Professors in header,,https://gradebook.vivifyideas.com/all-professors,all professors page is opened,,All professors page is opened
+Validate all fields and buttons,TC-4,TC-3,Validate that there is filter field and list of all professors,,,Search field and list of all professors is on the page,,Search field and list of all professors is on the page
+Enter name of professor in search field,TC-5,TC-3,Enter name,,Tamara,Only professors with name Tamara are listed,,Only professors with name Tamara are listed
+,,,,,,,,
+,,,,,,,,
+Module name:,Create professor,,,,,,,
+Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
+Launch application,TC-01,Open the browser,"1.Enter url in search field
+2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
+Log in,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
+Vivify20",User is logged in,,User is logged in
+Click on Proffesors/Create Professor,TC-3,TC-2,Click on Professors/Create Professor in header,,https://gradebook.vivifyideas.com/create-professor,Create professor page is opened,,Create professor page is opened
+Validate all fields and buttons,TC-4,TC-3,Validate that there are fields for name and add image and submitt buttons,,,All fields and buttons are on the page,,All fields and buttons are on the page
+Proffesor new,TC-5,TC-3,"Enter first and last name
+Click Submitt button",,"Tamara
+Ruzic",Name is entered. Professor created,,"New professor created, page with all professors opened"
+Add image,TC-6,TC-3,"Enter name
+click on Add image button. Add image url. Submit",,https://thefreshtoast.com/wp-content/uploads/2017/08/got-ice-dragons-1068x580.jpg,Image has been added,,Image has been added and professor created
+Proffesor - no name,TC-7,TC-3,click on Add image button. Click Submitt button,,,New professor can’t be created. Name is required,,New professor can’t be created
