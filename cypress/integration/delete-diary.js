@@ -23,7 +23,7 @@ describe("Delete diary", () => {
 
     })
 
-    it.only("Delete diary", () => {
+    it("Delete diary", () => {
         diaryPage.searchField.type('New Diary')
         diaryPage.searchBtn.click()
         cy.wait(1000)
