@@ -1,0 +1,24 @@
+{
+  "name": "gradebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^4.12.1",
+    "faker": "^4.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tammy-R/Gradebook.git"
+  },
+  "author": "Tamara Ruzic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tammy-R/Gradebook/issues"
+  },
+  "homepage": "https://github.com/Tammy-R/Gradebook#readme"
+}

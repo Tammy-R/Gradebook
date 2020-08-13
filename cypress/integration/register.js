@@ -1,16 +1,11 @@
 import {registerPage} from "../page_object/register_page"
-// import {faker} from "faker";
+import faker from "faker";
 
-// const faker = require('faker');
-// let randomName = faker.name.firstName();
-// let randomLastName = faker.name.lastName();
-// let randomEmail = faker.internet.email();
-// let randomPass = faker.internet.password();
 
-let randomName = "Jane";
-let randomLastName = "Doe";
-let randomEmail = "jane@doe.com";
-let randomPass = "Vivify20";
+let randomName = faker.name.firstName();
+let randomLastName = faker.name.lastName();
+let randomEmail = faker.internet.email();
+let randomPass = faker.internet.password();
 
 describe ("Register new user",() => {
 

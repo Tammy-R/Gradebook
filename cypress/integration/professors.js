@@ -2,6 +2,10 @@ import { loginPage } from "../page_object/login_page"
 import { diaryPage } from "../page_object/diary"
 import { USER } from "../fixtures/constants"
 import { profPage } from "../page_object/prof"
+import faker from "faker";
+
+let name = faker.name.firstName();
+let surname = faker.name.lastName();
 
 let url = 'https://upload.wikimedia.org/wikipedia/bs/c/c4/Homerova_slika.png'
 
@@ -33,8 +37,9 @@ describe("Proffesors module", () => {
     
 
     it("Create professor", () => {
-        // profPage.dropdown.click()
-        profPage.newProfessor('Pera', 'Peric', url)
+        //  profPage.dropdown.click()
+        // profPage.createProf.click()
+        profPage.newProfessor(name, surname, url)
         profPage.removeImg.should('be.visible')
         profPage.moveUp.should('be.visible')
         profPage.moveDown.should('be.visible')
