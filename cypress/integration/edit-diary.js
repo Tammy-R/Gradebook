@@ -12,17 +12,25 @@ let url = 'https://citymagazine.rs/wp-content/uploads/2019/10/homer-simpson-1213
 describe("Edit diary", () => {
 
 
+    // before(() => {
+    //     cy.visit('/')
+    //     loginPage.loginButton.click()
+    //     loginPage.login(USER.EMAIL, USER.PASSWORD)
+    //     cy.wait(1000)
+    //     diaryPage.createDiary.click()
+    //     cy.url().should('contain', '/create-gradebook')
+    //     diaryPage.create('New diary')
+    // })
+
+
     beforeEach(() => {
         cy.visit('/')
         loginPage.loginButton.click()
         loginPage.login(USER.EMAIL, USER.PASSWORD)
         cy.wait(1000)
-        // diaryPage.createDiary.click()
-        // cy.url().should('contain', '/create-gradebook')
-        // diaryPage.create('New diary')
         diaryPage.home.click()
         cy.wait(1000)
-        diaryPage.search('New')
+        diaryPage.search('New diary')
     })
 
 
@@ -36,7 +44,6 @@ describe("Edit diary", () => {
     })
 
     it("Edit diary - add student", () => {
-        // diaryPage.search('New')
         newStudent.addStudent.click()
         cy.wait(1000)
         newStudent.add(name, lastName, url)
@@ -47,7 +54,6 @@ describe("Edit diary", () => {
     })
 
     it("Edit diary - can't add student", () => {
-         //diaryPage.search('New')
         newStudent.addStudent.click()
         cy.wait(1000)
         newStudent.add('Jane', '', '')
@@ -57,7 +63,6 @@ describe("Edit diary", () => {
 
 
     it("Edit diary - add comment", () => {
-        //diaryPage.search('New')
         diaryPage.comment.type('First comment')
         diaryPage.postComment.click()
         diaryPage.deleteComment.should('be.visible')
@@ -65,7 +70,6 @@ describe("Edit diary", () => {
 
 
     it("Edit diary - delete comment", () => {
-        // diaryPage.search('New')
         diaryPage.deleteComment.click()
         cy.log('Comment has been deleted')
         cy.get('.comment-box').should('not.exist')
