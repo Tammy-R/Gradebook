@@ -17,14 +17,14 @@ describe("Edit diary", () => {
         loginPage.loginButton.click()
         loginPage.login(USER.EMAIL, USER.PASSWORD)
         cy.wait(1000)
+        // diaryPage.createDiary.click()
+        // cy.url().should('contain', '/create-gradebook')
+        // diaryPage.create('New diary')
         diaryPage.home.click()
-        cy.url().should('contain', '/gradebooks')
+        cy.wait(1000)
         diaryPage.search('New')
     })
 
-    // beforeEach(() => {
-    //     diaryPage.search('New')
-    // })
 
     it("Edit diary - change professor", () => {
         diaryPage.editDiary.click()
@@ -47,7 +47,7 @@ describe("Edit diary", () => {
     })
 
     it("Edit diary - can't add student", () => {
-        // diaryPage.search('New')
+         //diaryPage.search('New')
         newStudent.addStudent.click()
         cy.wait(1000)
         newStudent.add('Jane', '', '')
@@ -57,7 +57,7 @@ describe("Edit diary", () => {
 
 
     it("Edit diary - add comment", () => {
-        // diaryPage.search('New')
+        //diaryPage.search('New')
         diaryPage.comment.type('First comment')
         diaryPage.postComment.click()
         diaryPage.deleteComment.should('be.visible')

@@ -4,6 +4,10 @@ class DiaryPage {
         return cy.get('.nav-link').eq(2).contains('Create Gradebook')
     }
 
+    get myDiary() {
+        return cy.get('.nav-link').eq(1).contains('My')
+    }
+
     get title() {
         return cy.get('#title')
     }
@@ -67,10 +71,13 @@ class DiaryPage {
         return cy.get('.alert-danger')
     }
 
+    get buttons() {
+        return cy.get('.table-dark').find('>tbody')
+    }
 
     create(diaryTitle) {
         this.title.type(diaryTitle)
-        this.professor.select("50")
+        this.professor.select("165")
         this.submit.click()
     }
 

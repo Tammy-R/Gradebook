@@ -43,7 +43,7 @@ describe("Create Gradebook", () => {
     })
 
     it("Create Diary - no title", () => {
-        diaryPage.professor.select("56")
+        diaryPage.professor.select("5")
         diaryPage.submit.click()
         diaryPage.alert.should('exist')
             .should('be.visible')
