@@ -24,13 +24,14 @@ describe("Delete diary", () => {
     })
 
     it("Delete diary", () => {
-        diaryPage.searchField.type('New Diary')
-        diaryPage.searchBtn.click()
-        cy.wait(1000)
+        // diaryPage.searchField.type('New Diary')
+        // diaryPage.searchBtn.click()
+        //cy.wait(1000)
         diaryPage.selectDiary.click()
         diaryPage.deleteDiary.click()
-        cy.wait(1000)
+        //cy.wait(1000)
         cy.log('Diary has been deleted')
+        cy.wait(1000)
         cy.url().should('contain', '/gradebooks')
 
     })

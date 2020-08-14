@@ -29,7 +29,7 @@ describe("Create Gradebook", () => {
     })
 
 
-    it.only("Create Diary", () => {
+    it("Create Diary", () => {
         diaryPage.create('New diary')
         diaryPage.title.should('have.value', 'New diary')
         cy.url().should('contain', '/gradebooks')
@@ -42,8 +42,8 @@ describe("Create Gradebook", () => {
         cy.url().should('contain', '/create-gradebook')
     })
 
-    it("Create Diary - no name", () => {
-        diaryPage.professor.select("50")
+    it("Create Diary - no title", () => {
+        diaryPage.professor.select("56")
         diaryPage.submit.click()
         diaryPage.alert.should('exist')
             .should('be.visible')

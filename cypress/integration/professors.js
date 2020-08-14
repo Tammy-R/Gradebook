@@ -61,7 +61,7 @@ describe("Proffesors module", () => {
     it("Create professor - no first name", () => {
         profPage.dropdown.click()
         profPage.createProf.click()
-        profPage.newProfessor('', 'Peric', 'url')
+        profPage.newProfessor('', surname, url)
         profPage.submit.click()
         profPage.firstName.then(($input) => {
             expect($input[0].validationMessage).to.eq('Please fill out this field.')
