@@ -169,8 +169,8 @@ Module name:,My gradebook,,,,,,,
 Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
 Launch application,TC-01,Open the browser,"1.Enter url in search field
 2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
-Log in,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
-Vivify20",User is logged in,,User is logged in
+Log in and create diary,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
+Vivify20",User is logged in and diary created,,User is logged in
 Click on My Gradebook,TC-3,TC-2,Click on My Gradebook in header,,https://gradebook.vivifyideas.com/my-gradebook/5,My gradebook page is opened,,My gradebook page is opened
 Validate all fields and buttons,TC-4,TC-3,"Validate that there is Student button, comment field, submit button, edit and delete buttons",,,Buttons and field on the page,,Buttons and field on the page
 Add Student,TC-5,TC-3,Click on Add Student button,,,If you don’t have diary warning message is showen: “ You dont have your diary. Please first set your own diary”,,If you don’t have diary warning message is showen: “ You dont have your diary. Please first set your own diary”
