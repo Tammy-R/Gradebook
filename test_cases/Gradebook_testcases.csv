@@ -74,7 +74,7 @@ Vivify20
 vivify20
 ruzictam@gmail.com",Password doesn’t match. Try again.User can’t be registered,,"User can’t be registered
 In postman I receive status 200 instead 400."
-Register - no email,TC-8,"TC-2, TC-3","Enter first name
+Register - no email,TC-9,"TC-2, TC-3","Enter first name
 Enter last name
 Enter pass
 Confirm pass
@@ -86,7 +86,7 @@ Vivify20
 vivify20
 /",Email is required.User can’t be registered,,"User can’t be registered
 In postman I receive status 200 instead 400."
-Register - wrong email,TC-9,"TC-2, TC-3","Enter first name
+Register - wrong email,TC-10,"TC-2, TC-3","Enter first name
 Enter last name
 Enter pass
 Confirm pass
@@ -98,7 +98,7 @@ Vivify20
 vivify20
 ruzictam.com",Email is incomplete.User can’t be registered,,"User can’t be registered
 In postman I receive status 200 instead 400."
-Register - no terms&cond,TC-10,"TC-2, TC-3","Enter first name
+Register - no terms&cond,TC-11,"TC-2, TC-3","Enter first name
 Enter last name
 Enter pass
 Confirm pass
@@ -169,30 +169,26 @@ Module name:,My gradebook,,,,,,,
 Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
 Launch application,TC-01,Open the browser,"1.Enter url in search field
 2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
-Log in and create diary,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
-Vivify20",User is logged in and diary created,,User is logged in
+Log in & crate diary,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
+Vivify20",User is logged in and created diary,,User is logged in & created diary
 Click on My Gradebook,TC-3,TC-2,Click on My Gradebook in header,,https://gradebook.vivifyideas.com/my-gradebook/5,My gradebook page is opened,,My gradebook page is opened
 Validate all fields and buttons,TC-4,TC-3,"Validate that there is Student button, comment field, submit button, edit and delete buttons",,,Buttons and field on the page,,Buttons and field on the page
-Add Student,TC-5,TC-3,Click on Add Student button,,,If you don’t have diary warning message is showen: “ You dont have your diary. Please first set your own diary”,,If you don’t have diary warning message is showen: “ You dont have your diary. Please first set your own diary”
-Add Student,TC-5,TC-3,"Click on Add Student button
+Add Student,TC-5,TC-2,"Click on Add Student button
 Enter student’s name and image",,"Jane Doe
 https://robbiesenbach.com/wp-content/uploads/2019/05/59a5dd9cb065da49008b4878-750-563.png",New page is opened. All fileds are filled out. student is created,,student is created
-Student,TC-6,TC-3. TC-5,No name,,Jane,Last name and name required,,Student can’t be created
-Comment,TC-6,TC-3,"Write comment
+Student,TC-6,TC-2. TC-5,No name,,Jane,Last name and name required,,Student can’t be created
+Comment,TC-7,TC-2,"Write comment
 Click on Submit button",,First Comment,Comment is posted,,Comment is posted
 ,,,,,,,,
-,,,,,,,,
-Module name:,All Professors,,,,,,,
+Module name:,Edit gradebook,,,,,,,
 Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
 Launch application,TC-01,Open the browser,"1.Enter url in search field
 2.click on submit button",,https://gradebook.vivifyideas.com/gradebooks,Browser should open home page,,Application is opened
-Log in,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
-Vivify20",User is logged in,,User is logged in
-Click on Proffesors/All Professors,TC-3,TC-2,Click on Professors/All Professors in header,,https://gradebook.vivifyideas.com/all-professors,all professors page is opened,,All professors page is opened
-Validate all fields and buttons,TC-4,TC-3,Validate that there is filter field and list of all professors,,,Search field and list of all professors is on the page,,Search field and list of all professors is on the page
-Enter name of professor in search field,TC-5,TC-3,Enter name,,Tamara,Only professors with name Tamara are listed,,Only professors with name Tamara are listed
-,,,,,,,,
-,,,,,,,,
+Log in & crate diary,TC-2,TC-1,enter valid credentials,,"ruzictam@gmail.com
+Vivify20",User is logged in and created diary,,User is logged in & created diary
+Click on My Gradebook,TC-3,TC-2,Click on My Gradebook in header,,https://gradebook.vivifyideas.com/my-gradebook/5,My gradebook page is opened,,My gradebook page is opened
+Click on edit,TC-4,"TC-2, TC-3","Change title, click on submit button",,New title,Title is changed\,,title is changed
+Delete diary,TC-5,"TC-2, TC-3",Click on Delete button,,,Diary has been deleted. No delete button on the page,,"diary has been deleted, delete button is not visible on the page"
 Module name:,Create professor,,,,,,,
 Test title:,Test case ID:,Pre-condition,Test steps,,Test data,Expected results,,Actual Results
 Launch application,TC-01,Open the browser,"1.Enter url in search field
