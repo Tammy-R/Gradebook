@@ -11,6 +11,7 @@ let url = 'https://citymagazine.rs/wp-content/uploads/2019/10/homer-simpson-1213
 
 describe("Edit diary", () => {
 
+    //Iz nekog razloga kad stavim u begore da se uloguje user i kreira dnevnik, a u beforeEach da ulazi na stranicu moj dnevnik test puca, klikne na dugme u meniju ali ne otvori stranicu
 
     // before(() => {
     //     cy.visit('/')
